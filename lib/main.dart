@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shop/constants/font_family.dart';
 import 'package:shop/constants/routes.dart';
 import 'package:shop/views/product_details_screen.dart';
@@ -11,7 +10,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: Get.key,
       title: 'Minha Loja',
       theme: ThemeData(
         primarySwatch: Colors.purple,
@@ -19,28 +17,9 @@ class MyApp extends StatelessWidget {
         fontFamily: FONT_FAMILY.LATO,
       ),
       initialRoute: '/',
-      onGenerateRoute: (RouteSettings settings) {
-        switch (settings.name) {
-          case '/':
-            return GetRoute(
-              page: ProductsOverviewScreen(),
-            );
-          case Routes.PRODUCT_DETAIL:
-            return GetRoute(
-              settings: settings,
-              page: ProductDetailsScreen(),
-              transition: Transition.fade,
-            );
-          default:
-            return GetRoute(
-              settings: settings,
-              transition: Transition.fade,
-              page: Scaffold(
-                body: Center(
-                    child: Text('No route defined for ${settings.name}')),
-              ),
-            );
-        }
+      routes: {
+        '/': (context) => ProductsOverviewScreen(),
+        Routes.PRODUCT_DETAIL: (context) => ProductDetailsScreen(),
       },
     );
   }
