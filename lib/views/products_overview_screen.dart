@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop/data/mockup.dart';
 import 'package:shop/models/product.dart';
+import 'package:shop/widgets/product_item.dart';
 
 class ProductsOverviewScreen extends StatelessWidget {
   final List<Product> loadedProducts = MOCK_PRODUCTS;
@@ -18,13 +19,15 @@ class ProductsOverviewScreen extends StatelessWidget {
         child: GridView.builder(
             itemCount: loadedProducts.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+              crossAxisCount: 1,
               childAspectRatio: 3 / 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
             ),
             itemBuilder: (context, i) {
-              return Text(this.loadedProducts[i].title);
+              return ProductItem(
+                this.loadedProducts[i],
+              );
             }),
       ),
     );
