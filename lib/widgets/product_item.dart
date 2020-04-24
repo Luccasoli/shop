@@ -20,6 +20,7 @@ class ProductItem extends StatelessWidget {
               Routes.PRODUCT_DETAIL,
               arguments: this.product,
             );
+            // Get.toNamed(Routes.PRODUCT_DETAIL, arguments: this.product)
           },
           child: Image.network(
             product.imageUrl,
