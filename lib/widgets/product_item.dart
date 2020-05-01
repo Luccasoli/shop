@@ -8,7 +8,8 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final product = Provider.of<Product>(context);
+    final product = Provider.of<Product>(context, listen: false);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -23,22 +24,24 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black54,
-          leading: IconButton(
-            icon: Icon(
-              product.isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: theme.accentColor,
-            ),
-            onPressed: () {
-              GetBar(
-                message:
-                    'Foi ${!product.isFavorite ? 'adicionado aos' : 'removido dos'} favoritos!',
-                duration: Duration(milliseconds: 2000),
-                isDismissible: false,
-                title: product.title,
-              ).show();
+          leading: Consumer<Product>(
+            builder: (context, product, _) => IconButton(
+              icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: theme.accentColor,
+              ),
+              onPressed: () {
+                GetBar(
+                  message:
+                      'Foi ${!product.isFavorite ? 'adicionado aos' : 'removido dos'} favoritos!',
+                  duration: Duration(milliseconds: 2000),
+                  isDismissible: false,
+                  title: product.title,
+                ).show();
 
-              product.toggleFavorite();
-            },
+                product.toggleFavorite();
+              },
+            ),
           ),
           title: Text(
             product.title,
