@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/constants/routes.dart';
 import 'package:shop/models/product.dart';
 
 class ProductItem extends StatelessWidget {
-  final Product product;
-
-  const ProductItem(this.product);
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final product = Provider.of<Product>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
           onTap: () {
-            Get.toNamed(Routes.PRODUCT_DETAIL, arguments: this.product);
+            Get.toNamed(Routes.PRODUCT_DETAIL, arguments: product);
           },
           child: Image.network(
             product.imageUrl,
@@ -27,13 +25,23 @@ class ProductItem extends StatelessWidget {
           backgroundColor: Colors.black54,
           leading: IconButton(
             icon: Icon(
-              Icons.favorite,
+              product.isFavorite ? Icons.favorite : Icons.favorite_border,
               color: theme.accentColor,
             ),
-            onPressed: () {},
+            onPressed: () {
+              GetBar(
+                message:
+                    'Foi ${!product.isFavorite ? 'adicionado aos' : 'removido dos'} favoritos!',
+                duration: Duration(milliseconds: 2000),
+                isDismissible: false,
+                title: product.title,
+              ).show();
+
+              product.toggleFavorite();
+            },
           ),
           title: Text(
-            this.product.title,
+            product.title,
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
