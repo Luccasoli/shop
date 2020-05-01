@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:shop/data/mockup.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/models/product.dart';
 import 'package:shop/widgets/product_item.dart';
 
-class ProductsOverviewScreen extends StatelessWidget {
-  final List<Product> loadedProducts = MOCK_PRODUCTS;
+import '../providers/products.dart';
 
+class ProductsOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final List<Product> loadedProducts = Provider.of<Products>(context).items;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,7 +27,7 @@ class ProductsOverviewScreen extends StatelessWidget {
             ),
             itemBuilder: (context, i) {
               return ProductItem(
-                this.loadedProducts[i],
+                loadedProducts[i],
               );
             }),
       ),
