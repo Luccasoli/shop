@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/providers/dynamic_theme.dart';
 import 'package:shop/widgets/product_grid.dart';
 
 class ProductsOverviewScreen extends StatefulWidget {
@@ -8,6 +10,7 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   bool _showFavoriteOnly = false;
+  bool isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,27 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           'Minha loja',
         ),
         actions: <Widget>[
+          Consumer<DynamicTheme>(
+            builder: (context, theme, _) => Row(
+              children: <Widget>[
+                Icon(Icons.brightness_7),
+                Switch.adaptive(
+                  value: isDarkMode,
+                  onChanged: (value) {
+                    setState(() {
+                      isDarkMode = value;
+                    });
+                    if (isDarkMode) {
+                      theme.setDarkTheme();
+                    } else {
+                      theme.setDefaultTheme();
+                    }
+                  },
+                ),
+                Icon(Icons.brightness_3),
+              ],
+            ),
+          ),
           PopupMenuButton(
             onSelected: (bool selectedValue) {
               setState(() {
