@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/data/mockup.dart';
-import 'package:shop/models/product.dart';
+import 'package:shop/providers/product.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = MOCK_PRODUCTS;
