@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/constants/routes.dart';
 import 'package:shop/providers/product.dart';
@@ -15,7 +14,8 @@ class ProductItem extends StatelessWidget {
       child: GridTile(
         child: GestureDetector(
           onTap: () {
-            Get.toNamed(Routes.PRODUCT_DETAIL, arguments: product);
+            Navigator.of(context)
+                .pushNamed(Routes.PRODUCT_DETAIL, arguments: product);
           },
           child: Image.network(
             product.imageUrl,
@@ -31,13 +31,14 @@ class ProductItem extends StatelessWidget {
                 color: theme.accentColor,
               ),
               onPressed: () {
-                GetBar(
-                  message:
-                      'Foi ${!product.isFavorite ? 'adicionado aos' : 'removido dos'} favoritos!',
-                  duration: Duration(milliseconds: 2000),
-                  isDismissible: false,
-                  title: product.title,
-                ).show();
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                        '${product.title} foi ${!product.isFavorite ? 'adicionado aos' : 'removido dos'} favoritos!'),
+                    behavior: SnackBarBehavior.floating,
+                    duration: Duration(milliseconds: 2000),
+                  ),
+                );
 
                 product.toggleFavorite();
               },

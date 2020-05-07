@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/constants/font_family.dart';
 import 'package:shop/constants/routes.dart';
 import 'package:shop/providers/cart.dart';
 import 'package:shop/providers/dynamic_theme.dart';
@@ -28,33 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<DynamicTheme>(
       builder: (context, themeInstance, _) => MaterialApp(
-        navigatorKey: Get.key,
         title: 'Minha Loja',
-        navigatorObservers: [GetObserver()],
         theme: themeInstance.theme,
         initialRoute: '/',
-        onGenerateRoute: (RouteSettings settings) {
-          switch (settings.name) {
-            case '/':
-              return GetRoute(
-                page: ProductsOverviewScreen(),
-              );
-            case Routes.PRODUCT_DETAIL:
-              return GetRoute(
-                transitionDuration: Duration(milliseconds: 200),
-                settings: settings,
-                page: ProductDetailsScreen(),
-              );
-            default:
-              return GetRoute(
-                transitionDuration: Duration(milliseconds: 200),
-                settings: settings,
-                page: Scaffold(
-                  body: Center(
-                      child: Text('No route defined for ${settings.name}')),
-                ),
-              );
-          }
+        routes: {
+          '/': (context) => ProductsOverviewScreen(),
+          Routes.PRODUCT_DETAIL: (context) => ProductDetailsScreen()
         },
       ),
     );
