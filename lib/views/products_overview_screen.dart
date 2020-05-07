@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/constants/routes.dart';
 import 'package:shop/providers/cart.dart';
 import 'package:shop/providers/dynamic_theme.dart';
 import 'package:shop/widgets/badge.dart';
@@ -65,7 +66,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               icon: Icon(
                 Icons.shopping_cart,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.CART);
+              },
             ),
             builder: (context, cart, child) => Badge(
               child: child,
