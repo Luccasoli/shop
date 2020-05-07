@@ -28,6 +28,7 @@ class ProductItem extends StatelessWidget {
           backgroundColor: Colors.black54,
           leading: Consumer<Product>(
             builder: (context, product, _) => IconButton(
+              splashColor: theme.accentColor,
               icon: Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border,
                 color: theme.accentColor,
@@ -51,6 +52,7 @@ class ProductItem extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
+            splashColor: theme.accentColor,
             icon: Icon(
               Icons.add_shopping_cart,
               color: theme.accentColor,

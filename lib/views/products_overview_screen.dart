@@ -72,7 +72,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             ),
             builder: (context, cart, child) => Badge(
               child: child,
-              value: cart.itemCount.toString(),
+              value: cart.itemsCount.toString(),
             ),
           )
         ],
