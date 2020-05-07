@@ -8,17 +8,20 @@ import 'package:shop/views/product_details_screen.dart';
 import 'package:shop/views/products_overview_screen.dart';
 
 void main() => runApp(
-      MultiProvider(providers: [
-        ChangeNotifierProvider(
-          create: (context) => Products(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => Cart(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => DynamicTheme(),
-        ),
-      ], child: MyApp()),
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => Products(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => Cart(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => DynamicTheme(),
+          ),
+        ],
+        child: MyApp(),
+      ),
     );
 
 class MyApp extends StatelessWidget {
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
       builder: (context, themeInstance, _) => MaterialApp(
         title: 'Minha Loja',
         theme: themeInstance.theme,
+        debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
           '/': (context) => ProductsOverviewScreen(),
