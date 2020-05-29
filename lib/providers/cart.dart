@@ -39,6 +39,11 @@ class Cart with ChangeNotifier {
     return _total;
   }
 
+  void clear() {
+    _items = {};
+    notifyListeners();
+  }
+
   void addItem(Product item) {
     if (_items.containsKey(item.id)) {
       _items.update(
