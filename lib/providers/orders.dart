@@ -32,7 +32,7 @@ class Orders with ChangeNotifier {
         OrderItem(
           id: Random().nextDouble().toString(),
           total: cart.totalAmount,
-          products: cart.items.values,
+          products: cart.items.values.toList(),
           date: DateTime.now(),
         ));
     notifyListeners();
