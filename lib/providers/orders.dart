@@ -18,12 +18,16 @@ class OrderItem {
 }
 
 class Orders with ChangeNotifier {
-  List<OrderItem> _orders = [];
+  List<OrderItem> _items = [];
 
-  List<OrderItem> get orders => [..._orders];
+  List<OrderItem> get items => [..._items];
+
+  int get itemsCount {
+    return _items.length;
+  }
 
   void addOrder(Cart cart) {
-    _orders.insert(
+    _items.insert(
         0,
         OrderItem(
           id: Random().nextDouble().toString(),
