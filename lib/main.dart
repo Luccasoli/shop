@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop/constants/routes.dart';
 import 'package:shop/providers/cart.dart';
 import 'package:shop/providers/dynamic_theme.dart';
+import 'package:shop/providers/orders.dart';
 import 'package:shop/providers/products.dart';
 import 'package:shop/views/cart_screen.dart';
 import 'package:shop/views/product_details_screen.dart';
@@ -16,6 +17,9 @@ void main() => runApp(
           ),
           ChangeNotifierProvider(
             create: (context) => Cart(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => Orders(),
           ),
           ChangeNotifierProvider(
             create: (context) => DynamicTheme(),
