@@ -37,9 +37,9 @@ class MyApp extends StatelessWidget {
         title: 'Minha Loja',
         theme: themeInstance.theme,
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
+        initialRoute: Routes.HOME,
         routes: {
-          '/': (context) => ProductsOverviewScreen(),
+          Routes.HOME: (context) => ProductsOverviewScreen(),
           Routes.PRODUCT_DETAIL: (context) => ProductDetailsScreen(),
           Routes.CART: (context) => CartScreen(),
         },
